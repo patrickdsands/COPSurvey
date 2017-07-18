@@ -28,10 +28,9 @@ namespace COPSurvey.Controllers
             return View("About",inUseDevice);
         }
 
-        public ActionResult About(InUseDevice inUseDevice)
+        public ActionResult About()
         {
-            ViewBag.SerialNumber = inUseDevice.SerialNumber;
-            return View(inUseDevice);
+            return View();
         }
 
         public ActionResult Contact()
