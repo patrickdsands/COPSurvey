@@ -25,11 +25,5 @@ namespace COPSurvey.Models
         {
             return this;
         }
-
-        public string DisplayPlainText()
-        {
-            return "DEVICE{SerialNumber: " + this.SerialNumber + ", PCName: " + this.PCName + "}";
-        }
-
     }
 }
