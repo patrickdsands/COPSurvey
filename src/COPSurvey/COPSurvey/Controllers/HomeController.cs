@@ -30,7 +30,7 @@ namespace COPSurvey.Controllers
 
         public ActionResult About()
         {
-            return View();
+            return View(device);
         }
 
         public ActionResult Contact()
