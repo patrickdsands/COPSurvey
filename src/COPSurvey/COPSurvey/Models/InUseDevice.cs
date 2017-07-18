@@ -25,8 +25,5 @@ namespace COPSurvey.Models
         {
             return this;
         }
-
-        
-
     }
 }
