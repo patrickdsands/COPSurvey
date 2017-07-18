@@ -1,7 +1,47 @@
-﻿@{
+﻿@model COPSurvey.Models.InUseDevice
+
+@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<h2>Details for Device</h2>
+<p>Use this area to enter your survey data.</p>
+
+<div class="About">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well">
+
+                <div class="form-group">
+                    <label for="SerialNumber" class="label-control">Serial Number:</label>
+                    <input type="text" id="SerialNumber" name="SerialNumber" class="form-control" value="@Model.SerialNumber" disabled/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well">
+
+                <div class="form-group">
+                    <label for="PCName" class="label-control">PC Name:</label>
+                    <input type="text" id="PCName" name="PCName" class="form-control" value="@ViewBag.PCName" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+                <div class="form-group">
+                    <button type="button" class="btn btn-success btn-lg " id="Update">
+                        <span class="glyphicon glyphicon-save"></span>Update
+                    </button>
+                </div>
+        </div>
+    </div>
+</div>
+
+

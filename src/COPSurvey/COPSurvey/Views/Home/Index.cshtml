@@ -6,9 +6,9 @@
 
 @using (Html.BeginForm())
 {
-        <h2>FIND SN</h2>
-        <p class="lead">Enter the device serial number in the field below.</p>
-        <div class="col-md-6">
+    <h2>Enter the device's serial number in the field below.</h2>
+        <p class="lead"></p>
+        <div class="col-md-12">
             <div class="well">
                 <div class="form-group">
                     @Html.TextBoxFor(m => m.SerialNumber, new { @class = "form-control" })

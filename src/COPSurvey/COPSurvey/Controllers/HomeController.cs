@@ -1,4 +1,5 @@
-﻿using System;
+﻿using COPSurvey.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,16 +9,29 @@ namespace COPSurvey.Controllers
 {
     public class HomeController : Controller
     {
+        InUseDevice device = null;
+
+        public HomeController()
+        {
+            device = new InUseDevice();
+        }
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Index(string SerialNumber)
         {
-            ViewBag.Message = "Your application description page.";
+            var inUseDevice = new InUseDevice(SerialNumber);
+            return View("About",inUseDevice);
+        }
 
-            return View();
+        public ActionResult About(InUseDevice inUseDevice)
+        {
+            ViewBag.SerialNumber = inUseDevice.SerialNumber;
+            return View(inUseDevice);
         }
 
         public ActionResult Contact()

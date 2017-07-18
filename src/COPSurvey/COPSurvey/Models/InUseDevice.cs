@@ -21,5 +21,10 @@ namespace COPSurvey.Models
             this.SerialNumber = SerialNumber;
         }
 
+        public InUseDevice GetInUseDevice()
+        {
+            return this;
+        }
+
     }
 }
