@@ -1,0 +1,23 @@
+﻿@model COPSurvey.Models.InUseDevice
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@using (Html.BeginForm())
+{
+        <h2>FIND SN</h2>
+        <p class="lead">Enter the device serial number in the field below.</p>
+        <div class="col-md-6">
+            <div class="well">
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.SerialNumber, new { @class = "form-control" })
+                    <button type="submit" class="btn btn-success btn-lg " id="SerialNumber">
+                        <span class="glyphicon glyphicon-save"></span>Find
+                    </button>
+                </div>
+            </div>
+            
+        </div>
+        
+}
