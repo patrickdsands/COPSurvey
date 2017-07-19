@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -11,49 +13,44 @@ namespace COPSurvey.Data
     {
         private static InUseDevice[] _inUseDevices = new InUseDevice[0];
 
-        DataTable inUseDeviceTable = null;
-
-        public InUseDeviceRepository()
-        {
-            inUseDeviceTable = new AMCPMDBPRODDataSet.InUseDeviceDataTable();
-        }
+        public InUseDeviceRepository() { }
 
         public InUseDevice GetInUseDevice(string SerialNumber)
         {
             InUseDevice device = null;
 
-            string findSN = string.Format("@SerialNumber = SN", SerialNumber);
-            DataRow[] row = inUseDeviceTable.Select(findSN);
+            SqlCommand command = null;
+            SqlDataReader reader = null;
+            string query = @"SELECT * FROM InUseDevice WHERE SN = @sn";
 
-            foreach (DataRow dataRow in row)
+            using (SqlConnection connection = new SqlConnection(@"Data Source=WINETINSPRD01;Initial Catalog=AMCPMDBPROD;Integrated Security=SSPI;"))
             {
-                //snColumnIndex = dataRow.Table.Columns["SN"].Ordinal;
-
-                if(dataRow != null)
+                try
                 {
-                    device = new InUseDevice(dataRow["SN"].ToString(), dataRow["Name"].ToString());
+                    connection.Open();
+                    command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@sn", SerialNumber);
+                    reader = command.ExecuteReader();
 
-                    //device = new InUseDevice(dataRow.Field<string>("SerialNumber"), 
-                    //    dataRow.Field<string>("Name"));
-                    break;
-                }
-                else
+                    while (reader.Read())
+                    {
+                        device = new InUseDevice(SerialNumber, reader["Name"].ToString(), reader["DeviceType"].ToString(), 
+                            reader["SupportGroup"].ToString(), reader["Building"].ToString(), reader["Floor"].ToString(), 
+                            reader["Room"].ToString());
+                    }
+
+                }catch(Exception ex)
                 {
-                    Console.WriteLine("The Data row is null!");
+                    Console.WriteLine("Error!" + ex.Message + "\n" + ex.StackTrace);
                 }
             }
-            //if (row != null)
-            //{
-            //    device = new InUseDevice(SerialNumber, row["Name"].Field<string>("Name"));
-            //}
+
             return device;
                 
         }
 
-        public DataTable InitializeInUseDeviceTable()
-        {
-            return new AMCPMDBPRODDataSet.InUseDeviceDataTable();
-        }
+        
 
     }
 }
+
