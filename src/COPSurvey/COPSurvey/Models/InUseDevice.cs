@@ -21,6 +21,12 @@ namespace COPSurvey.Models
             this.SerialNumber = SerialNumber;
         }
 
+        public InUseDevice(string SerialNumber, string PCName)
+        {
+            this.SerialNumber = SerialNumber;
+            this.PCName = PCName;
+        }
+
         public InUseDevice GetInUseDevice()
         {
             return this;

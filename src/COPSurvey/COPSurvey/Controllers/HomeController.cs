@@ -1,4 +1,5 @@
-﻿using COPSurvey.Models;
+﻿using COPSurvey.Data;
+using COPSurvey.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,12 @@ namespace COPSurvey.Controllers
     public class HomeController : Controller
     {
         InUseDevice device = null;
+        private InUseDeviceRepository deviceRepository = null;
 
         public HomeController()
         {
             device = new InUseDevice();
+            deviceRepository = new InUseDeviceRepository();
         }
 
         public ActionResult Index()
@@ -24,8 +27,8 @@ namespace COPSurvey.Controllers
         [HttpPost]
         public ActionResult Index(string SerialNumber)
         {
-            var inUseDevice = new InUseDevice(SerialNumber);
-            return View("About",inUseDevice);
+            var inUseDevice = deviceRepository.GetInUseDevice(SerialNumber);
+            return View("About", inUseDevice);
         }
 
         public ActionResult About()

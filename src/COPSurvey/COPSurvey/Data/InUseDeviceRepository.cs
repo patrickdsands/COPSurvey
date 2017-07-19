@@ -11,19 +11,48 @@ namespace COPSurvey.Data
     {
         private static InUseDevice[] _inUseDevices = new InUseDevice[0];
 
-        DataTable inUseDeviceTable = new AMCPMDBPRODDataSet.InUseDeviceDataTable();
-
-        List<string> listOfSerialNumbers = new List<string>();
+        DataTable inUseDeviceTable = null;
 
         public InUseDeviceRepository()
         {
-            
+            inUseDeviceTable = new AMCPMDBPRODDataSet.InUseDeviceDataTable();
         }
 
         public InUseDevice GetInUseDevice(string SerialNumber)
         {
-            DataRow[] row = inUseDeviceTable.Select("SN = " + SerialNumber);
-            return null;
+            InUseDevice device = null;
+
+            string findSN = string.Format("@SerialNumber = SN", SerialNumber);
+            DataRow[] row = inUseDeviceTable.Select(findSN);
+
+            foreach (DataRow dataRow in row)
+            {
+                //snColumnIndex = dataRow.Table.Columns["SN"].Ordinal;
+
+                if(dataRow != null)
+                {
+                    device = new InUseDevice(dataRow["SN"].ToString(), dataRow["Name"].ToString());
+
+                    //device = new InUseDevice(dataRow.Field<string>("SerialNumber"), 
+                    //    dataRow.Field<string>("Name"));
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("The Data row is null!");
+                }
+            }
+            //if (row != null)
+            //{
+            //    device = new InUseDevice(SerialNumber, row["Name"].Field<string>("Name"));
+            //}
+            return device;
+                
+        }
+
+        public DataTable InitializeInUseDeviceTable()
+        {
+            return new AMCPMDBPRODDataSet.InUseDeviceDataTable();
         }
 
     }
