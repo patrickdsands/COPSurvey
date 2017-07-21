@@ -2,6 +2,22 @@
 
 @{
     ViewBag.Title = "Device Detail: " + Model.SerialNumber;
+
+    var deviceTypeListItems = new[]
+    {
+        new SelectListItem(){ Value = "Desktop", Text = "SFF", Selected = true },
+        new SelectListItem(){ Value = "Desktop Mini", Text = "Desktop Mini", Selected = false },
+        new SelectListItem(){ Value = "Mini Tower", Text = "Mini Tower", Selected = false },
+        new SelectListItem(){ Value = "Laptop", Text = "Laptop", Selected = false }
+    };
+
+    var businessUseListItems = new[]
+    {
+        new SelectListItem(){ Value = "Unclassified", Text = "Unclassified", Selected = true },
+        new SelectListItem(){ Value = "Non-Clinical", Text = "Non-Clinical", Selected = false },
+        new SelectListItem(){ Value = "Clinical", Text = "Clinical", Selected = false },
+        new SelectListItem(){ Value = "Patient Care", Text = "Patient Care", Selected = false }
+    };
 }
 
 <h2>Details for Device</h2>
@@ -13,7 +29,7 @@
             <div class="well">
 
                 <div class="form-group">
-                    <label for="SerialNumber" class="label-control">Serial Number:</label>
+                    @Html.LabelFor(m => m.SerialNumber, new { @class = "control-label" })
                     <input type="text" id="SerialNumber" name="SerialNumber" class="form-control" value="@Model.SerialNumber" disabled/>
                 </div>
 
@@ -26,32 +42,37 @@
             <div class="well">
 
                 <div class="form-group">
-                    <label for="PCName" class="label-control">PC Name:</label>
-                    <input type="text" id="PCName" name="PCName" class="form-control" value="@Model.PCName" />
+                    @Html.LabelFor(m => m.PCName, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.PCName, new { @class = "form-control"})
                 </div>
 
                 <div class="form-group">
-                    <label for="SupportGroup" class="label-control">Support Group:</label>
-                    <input type="text" id="SupportGroup" name="SupportGroup" class="form-control" value="@Model.SupportGroup" />
+                    @Html.LabelFor(m => m.SupportGroup, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.SupportGroup, new { @class = "form-control" })
                 </div>
 
                 <div class="form-group">
-                    <label for="DeviceType" class="label-control">Device Type:</label>
-                    <input type="text" id="DeviceType" name="DeviceType" class="form-control" value="@Model.DeviceType" />
+                    @Html.LabelFor(m => m.DeviceType, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.DeviceType, deviceTypeListItems, new { @class = "form-control"})
                 </div>
 
                 <div class="form-group">
-                    <label for="Building" class="label-control">Building:</label>
+                    @Html.LabelFor(m => m.BusinessUse, new { @class = "control-label" })
+                    @Html.DropDownListFor(m => m.BusinessUse, businessUseListItems, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Building, new { @class = "control-label" })
                     <input type="text" id="Building" name="Building" class="form-control" value="@Model.Building" />
                 </div>
 
                 <div class="form-group">
-                    <label for="Floor" class="label-control">Floor:</label>
+                    @Html.LabelFor(m => m.Floor, new { @class = "control-label" })
                     <input type="text" id="Floor" name="Floor" class="form-control" value="@Model.Floor" />
                 </div>
 
                 <div class="form-group">
-                    <label for="Room" class="label-control">Room:</label>
+                    @Html.LabelFor(m => m.Room, new { @class = "control-label" })
                     <input type="text" id="Room" name="Room" class="form-control" value="@Model.Room" />
                 </div>
 

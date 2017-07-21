@@ -28,6 +28,10 @@ namespace COPSurvey.Controllers
         public ActionResult Index(string SerialNumber)
         {
             var inUseDevice = deviceRepository.GetInUseDevice(SerialNumber);
+            if(inUseDevice == null)
+            {
+                return View();
+            }
             return View("About", inUseDevice);
         }
 

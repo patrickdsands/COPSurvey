@@ -34,9 +34,9 @@ namespace COPSurvey.Data
 
                     while (reader.Read())
                     {
-                        device = new InUseDevice(SerialNumber, reader["Name"].ToString(), reader["DeviceType"].ToString(), 
-                            reader["SupportGroup"].ToString(), reader["Building"].ToString(), reader["Floor"].ToString(), 
-                            reader["Room"].ToString());
+                        device = new InUseDevice(SerialNumber, reader["Name"].ToString(), reader["DeviceType"].ToString(),
+                            reader["BusinessUse"].ToString(), reader["SupportGroup"].ToString(), reader["Building"].ToString(),
+                            reader["Floor"].ToString(), reader["Room"].ToString());
                     }
 
                 }catch(Exception ex)
@@ -50,6 +50,7 @@ namespace COPSurvey.Data
         }
 
         
+
 
     }
 }

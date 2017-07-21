@@ -10,6 +10,7 @@ namespace COPSurvey.Models
         public string SerialNumber { get; set; }
         public string PCName { get; set; }
         public string DeviceType { get; set; }
+        public string BusinessUse { get; set; }
         public string SupportGroup { get; set; }
         public string Building { get; set; }
         public string Floor { get; set; }
@@ -21,6 +22,7 @@ namespace COPSurvey.Models
             SerialNumber = "";
             PCName = "";
             DeviceType = "";
+            BusinessUse = "";
             SupportGroup = "";
             Building = "";
             Floor = "";
@@ -39,12 +41,13 @@ namespace COPSurvey.Models
             this.PCName = PCName;
         }
 
-        public InUseDevice(string SerialNumber, string PCName, string DeviceType, string SupportGroup, string Building, string Floor, 
+        public InUseDevice(string SerialNumber, string PCName, string DeviceType, string BusinessUse, string SupportGroup, string Building, string Floor, 
             string Room)
         {
             this.SerialNumber = SerialNumber;
             this.PCName = PCName;
             this.DeviceType = DeviceType;
+            this.BusinessUse = BusinessUse;
             this.SupportGroup = SupportGroup;
             this.Building = Building;
             this.Floor= Floor;
